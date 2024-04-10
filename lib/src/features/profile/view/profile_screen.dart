@@ -3,29 +3,32 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../viewmodel/profile_view_model.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final profileViewModel = ref.watch(profileViewModelProvider);
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Profile'),
       ),
-      body: Consumer(
-        builder: (context, watch, _) {
-          final profileViewModel = watch.read(profileViewModelProvider);
+      body: FutureBuilder(
+        future: ref.read(profileViewModelProvider).fetchProfile(),
+        builder: (context, __) {
           return Center(
-            child: profileViewModel.profile != null
-                ? Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text('Name: ${profileViewModel.profile!.name}'),
-                      Text('Email: ${profileViewModel.profile!.email}'),
-                    ],
-                  )
-                : CircularProgressIndicator(),
-          );
+              child: profileViewModel.profile != null
+                  ? Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text('Name: ${profileViewModel.profile!.name}'),
+                        Text('Email: ${profileViewModel.profile!.email}'),
+                      ],
+                    )
+                  : const Center(
+                      child: CircularProgressIndicator.adaptive(),
+                    ));
         },
       ),
     );

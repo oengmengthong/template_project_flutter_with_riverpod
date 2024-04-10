@@ -2,18 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../viewmodel/product_view_model.dart';
 
-class ProductScreen extends StatelessWidget {
+class ProductScreen extends ConsumerWidget {
   const ProductScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final productViewModel = ref.read(productViewModelProvider);
     return Scaffold(
       appBar: AppBar(
         title: Text('Products'),
       ),
-      body: Consumer(
-        builder: (context, watch, _) {
-          final productViewModel = watch.read(productViewModelProvider);
+      body: FutureBuilder(
+        future: ref.read(productViewModelProvider).fetchProducts(),
+        builder: (context, __) {
           return productViewModel.products != null
               ? ListView.builder(
                   itemCount: productViewModel.products!.length,
@@ -26,8 +27,8 @@ class ProductScreen extends StatelessWidget {
                     );
                   },
                 )
-              : Center(
-                  child: CircularProgressIndicator(),
+              : const Center(
+                  child: CircularProgressIndicator.adaptive(),
                 );
         },
       ),
