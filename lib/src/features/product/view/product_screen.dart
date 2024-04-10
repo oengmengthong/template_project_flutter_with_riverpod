@@ -7,7 +7,6 @@ class ProductScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final productViewModel = ref.read(productViewModelProvider);
     return Scaffold(
       appBar: AppBar(
         title: Text('Products'),
@@ -15,6 +14,8 @@ class ProductScreen extends ConsumerWidget {
       body: FutureBuilder(
         future: ref.read(productViewModelProvider).fetchProducts(),
         builder: (context, __) {
+          final productViewModel = ref.read(productViewModelProvider);
+
           return productViewModel.products != null
               ? ListView.builder(
                   itemCount: productViewModel.products!.length,

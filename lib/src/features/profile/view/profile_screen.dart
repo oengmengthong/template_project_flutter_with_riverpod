@@ -8,8 +8,6 @@ class ProfileScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final profileViewModel = ref.watch(profileViewModelProvider);
-
     return Scaffold(
       appBar: AppBar(
         title: Text('Profile'),
@@ -17,6 +15,8 @@ class ProfileScreen extends ConsumerWidget {
       body: FutureBuilder(
         future: ref.read(profileViewModelProvider).fetchProfile(),
         builder: (context, __) {
+          final profileViewModel = ref.watch(profileViewModelProvider);
+
           return Center(
               child: profileViewModel.profile != null
                   ? Column(
