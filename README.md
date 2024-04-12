@@ -5,17 +5,17 @@
     - app.dart (Main Application Entry Point)
     - router.gr.dart (AutoRoute Generated Router)
   - features/
-    - home/
+    - product/
       - view/
-        - home_screen.dart
+        - product_screen.dart
         - widgets/
-          - home_widget.dart
+          - product_widget.dart
       - viewmodel/
-        - home_view_model.dart
+        - product_view_model.dart
       - model/
-        - home_model.dart
+        - product_model.dart
       - service/
-        - home_service.dart
+        - product_service.dart
     - profile/
       - view/
         - profile_screen.dart

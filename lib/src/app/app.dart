@@ -16,7 +16,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       routerConfig: _appRouter.config(),
-      title: 'Flutter with Riverpod Template Project',
+      title: 'Flutter with Riverpod',
     );
   }
 }

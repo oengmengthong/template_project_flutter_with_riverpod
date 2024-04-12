@@ -13,6 +13,10 @@ class AppRouter extends _$AppRouter {
   List<AutoRoute> get routes => [
         AutoRoute(page: HomeRoute.page, initial: true, path: '/'),
         AutoRoute(page: ProductRoute.page, path: '/product'),
-        AutoRoute(page: ProfileRoute.page, path: '/profile'),
+        AutoRoute(
+          page: ProfileRoute.page,
+          path: '/profile',
+          // guards: [AuthGuard],
+        ),
       ];
 }
